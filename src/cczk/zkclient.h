@@ -32,6 +32,7 @@
 #include <logging.h>
 #include <watcher.h>
 
+namespace xcs {
 namespace cczk {
   using boost::noncopyable;
   class watcher;
@@ -69,7 +70,7 @@ namespace cczk {
     void trigger_all_watcher(listener_map &);
     
   public  :
-    static zkclient* open(const zookeeper_config*/*config*/);
+    static zkclient* open(const zookeeper_config *config = NULL);
     
     void close();
     
@@ -83,7 +84,7 @@ namespace cczk {
     
     ReturnCode::type get_data_of_node(const string/*path*/, string&/*value*/);
     
-    ReturnCode::type create_node(const string/*path*/, string&/*value*/, CreateMode::type/*mode*/);
+    ReturnCode::type create_node(const string/*path*/, const string&/*value*/, CreateMode::type/*mode*/);
     
     ReturnCode::type delete_node(const string/*path*/);
     
@@ -96,6 +97,7 @@ namespace cczk {
     ReturnCode::type drop_listener_with_path(boost::shared_ptr<watcher>/*listener*/, string/*path*/);
   };
   
-}
+}  // namespace cczk
+}  // namespace xcs
 
 #endif
